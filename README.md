@@ -2,7 +2,7 @@
 
 A premium social platform for Indian trekkers — discover trails, find trek buddies, lend gear, and share mountain stories.
 
-**Live:** Deploy on [Vercel](https://vercel.com) (see [Deploy](#deploy-to-vercel))
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/MannyG3/TrekMates&project-name=trekmates&framework=nextjs&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY&envDescription=Supabase%20project%20URL%20and%20anon%20key)
 
 **Repo:** [github.com/MannyG3/TrekMates](https://github.com/MannyG3/TrekMates)
 
