@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { demoSignUp } from "@/lib/demo-auth";
 import { Button } from "@/components/ui/Button";
 import { MountainSilhouette } from "@/components/ui/MountainSilhouette";
 
@@ -15,28 +15,23 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error: authError } = await supabase.auth.signUp({
+    const { error: authError } = demoSignUp(
       email,
       password,
-      options: {
-        data: {
-          username: username.toLowerCase().replace(/\s+/g, "_"),
-          full_name: fullName,
-        },
-      },
-    });
+      username.toLowerCase().replace(/\s+/g, "_"),
+      fullName
+    );
 
     setLoading(false);
 
     if (authError) {
-      setError("Something went sideways — try again.");
+      setError(authError);
       return;
     }
 

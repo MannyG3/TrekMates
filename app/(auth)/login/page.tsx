@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { demoLogin } from "@/lib/demo-auth";
 import { Button } from "@/components/ui/Button";
 import { MountainSilhouette } from "@/components/ui/MountainSilhouette";
 
@@ -13,22 +13,18 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error: authError } = demoLogin(email, password);
 
     setLoading(false);
 
     if (authError) {
-      setError("Something went sideways — check your credentials.");
+      setError(authError);
       return;
     }
 
@@ -96,6 +92,18 @@ export default function LoginPage() {
               Create an account
             </Link>
           </p>
+
+          <div className="mt-6 border-t border-stone-700 pt-4">
+            <p className="mb-2 text-center text-xs text-stone-500">
+              Demo credentials:
+            </p>
+            <p className="text-center text-xs text-stone-600">
+              Email: <span className="font-mono text-stone-500">demo@trekmates.com</span>
+            </p>
+            <p className="text-center text-xs text-stone-600">
+              Password: <span className="font-mono text-stone-500">demo123</span>
+            </p>
+          </div>
         </div>
       </div>
     </div>
